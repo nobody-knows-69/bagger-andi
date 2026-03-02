@@ -32,10 +32,50 @@
       line-height: 1.65;
     }
 
+    /* ─────────── WIP BANNER ─────────── */
+    .wip-banner {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 600;
+      background: repeating-linear-gradient(
+        -45deg,
+        rgba(212,137,10,.18) 0px,
+        rgba(212,137,10,.18) 10px,
+        rgba(0,0,0,.35)      10px,
+        rgba(0,0,0,.35)      20px
+      );
+      background-color: #1a1500;
+      border-bottom: 1px solid rgba(212,137,10,.45);
+      color: var(--amber-l);
+      font-size: .72rem;
+      font-weight: 700;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      padding: .42rem 1rem;
+      text-align: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: .8rem;
+    }
+    .wip-dot {
+      width: 7px; height: 7px;
+      border-radius: 50%;
+      background: var(--amber);
+      display: inline-block;
+      animation: wip-pulse 1.4s ease-in-out infinite;
+      flex-shrink: 0;
+    }
+    .wip-dot:last-child { animation-delay: .7s; }
+    @keyframes wip-pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50%       { opacity: .35; transform: scale(.7); }
+    }
+
     /* ─────────── SIDEBAR ─────────── */
     .sidebar {
       position: fixed;
-      top: 0; left: 0; bottom: 0;
+      top: 30px; left: 0; bottom: 0;
       width: var(--sw);
       background: var(--surface);
       border-right: 1px solid var(--border);
@@ -149,7 +189,7 @@
     .mob-bar {
       display: none;
       position: fixed;
-      top: 0; left: 0; right: 0;
+      top: 30px; left: 0; right: 0;
       height: 58px;
       background: var(--surface);
       border-bottom: 1px solid var(--border);
@@ -760,14 +800,14 @@
     /* ─────────── RESPONSIVE ─────────── */
     @media (max-width: 820px) {
       .mob-bar { display: flex; }
-      .sidebar { transform: translateX(-100%); }
+      .sidebar { transform: translateX(-100%); top: 30px; }
       .sidebar.open { transform: translateX(0); }
-      .main { margin-left: 0; padding-top: 58px; }
+      .main { margin-left: 0; padding-top: 88px; } /* 30px banner + 58px mob-bar */
       .hero, .section { padding: 2.5rem 1.4rem; }
       footer { padding: 1.5rem 1.4rem; }
       .gal-grid { columns: 1; }
       .row2 { flex-direction: column; gap: 0; }
-      [id] { scroll-margin-top: 70px; }
+      [id] { scroll-margin-top: 100px; }
     }
 
     @media (max-width: 480px) {
@@ -995,6 +1035,13 @@
   </style>
 </head>
 <body>
+
+<!-- ══ WIP BANNER ══ -->
+<div class="wip-banner">
+  <span class="wip-dot"></span>
+  🚧 Diese Seite befindet sich noch im Aufbau – Testversion, keine offizielle Veröffentlichung
+  <span class="wip-dot"></span>
+</div>
 
 <!-- mobile top bar -->
 <div class="mob-bar">
