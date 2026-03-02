@@ -1,0 +1,7 @@
+# Exclude large/unnecessary files from the repo
+firmenprofil_bilder-1.pdf
+index.pdf
+index.txt
+index2.html
+*.mp4
+.claude/

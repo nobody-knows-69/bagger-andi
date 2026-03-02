@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Impressum – Haus-, Garten- & Bauservice Michaelis</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --amber:   #D4890A;
+      --amber-l: #F5A623;
+      --dark:    #111318;
+      --surface: #1C1F27;
+      --surface2:#242830;
+      --border:  rgba(212,137,10,.18);
+      --text:    #E8EAF0;
+      --muted:   #8B90A0;
+      --r:       18px;
+    }
+
+    body {
+      font-family: 'Segoe UI', system-ui, sans-serif;
+      background: var(--dark);
+      color: var(--text);
+      line-height: 1.7;
+      min-height: 100vh;
+    }
+
+    /* ── Top bar (mobile back button) ── */
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(17,19,24,.92);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 24px;
+      height: 58px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .topbar a {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--amber);
+      text-decoration: none;
+      font-size: .9rem;
+      font-weight: 600;
+      letter-spacing: .02em;
+      transition: color .2s;
+    }
+    .topbar a:hover { color: var(--amber-l); }
+
+    .topbar .arrow {
+      width: 28px; height: 28px;
+      border: 1.5px solid var(--amber);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: .8rem;
+      transition: background .2s, border-color .2s;
+    }
+    .topbar a:hover .arrow {
+      background: var(--amber);
+      border-color: var(--amber);
+      color: #000;
+    }
+
+    .topbar .brand {
+      margin-left: auto;
+      font-size: .78rem;
+      color: var(--muted);
+      letter-spacing: .04em;
+      text-transform: uppercase;
+    }
+
+    /* ── Page wrapper ── */
+    .page {
+      max-width: 820px;
+      margin: 0 auto;
+      padding: 56px 28px 80px;
+    }
+
+    /* ── Page title ── */
+    .page-title {
+      font-size: clamp(1.8rem, 4vw, 2.6rem);
+      font-weight: 800;
+      letter-spacing: -.01em;
+      margin-bottom: 8px;
+    }
+    .page-title span { color: var(--amber); }
+
+    .subtitle {
+      color: var(--muted);
+      font-size: .95rem;
+      margin-bottom: 52px;
+      padding-bottom: 28px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    /* ── Section cards ── */
+    .section {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--r);
+      padding: 32px 36px;
+      margin-bottom: 24px;
+      transition: border-color .25s;
+    }
+    .section:hover { border-color: rgba(212,137,10,.35); }
+
+    .section h2 {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--amber);
+      text-transform: uppercase;
+      letter-spacing: .06em;
+      margin-bottom: 18px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .section h2 .icon {
+      width: 32px; height: 32px;
+      background: linear-gradient(135deg, var(--amber), var(--amber-l));
+      border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1rem;
+      flex-shrink: 0;
+    }
+
+    .section h3 {
+      font-size: .92rem;
+      font-weight: 700;
+      color: var(--text);
+      margin: 22px 0 8px;
+      letter-spacing: .01em;
+    }
+
+    .section p, .section address {
+      font-size: .95rem;
+      color: var(--muted);
+      font-style: normal;
+      line-height: 1.75;
+    }
+
+    .section a {
+      color: var(--amber);
+      text-decoration: none;
+      border-bottom: 1px solid rgba(212,137,10,.3);
+      transition: border-color .2s, color .2s;
+    }
+    .section a:hover {
+      color: var(--amber-l);
+      border-color: var(--amber-l);
+    }
+
+    /* ── Placeholder badge ── */
+    .ph {
+      display: inline-block;
+      background: rgba(212,137,10,.12);
+      border: 1px dashed rgba(212,137,10,.45);
+      color: var(--amber-l);
+      border-radius: 6px;
+      padding: 1px 8px;
+      font-size: .85rem;
+      font-weight: 600;
+      letter-spacing: .02em;
+      cursor: default;
+    }
+
+    /* ── Info grid ── */
+    .info-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-top: 6px;
+    }
+
+    .info-item {
+      background: var(--surface2);
+      border-radius: 12px;
+      padding: 16px 18px;
+    }
+    .info-item .label {
+      font-size: .75rem;
+      text-transform: uppercase;
+      letter-spacing: .06em;
+      color: var(--muted);
+      margin-bottom: 5px;
+    }
+    .info-item .value {
+      font-size: .95rem;
+      color: var(--text);
+      font-weight: 600;
+    }
+
+    /* ── Divider ── */
+    .divider {
+      height: 1px;
+      background: var(--border);
+      margin: 22px 0;
+    }
+
+    /* ── Footer strip ── */
+    .foot-strip {
+      margin-top: 56px;
+      padding-top: 28px;
+      border-top: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .foot-strip p {
+      font-size: .82rem;
+      color: var(--muted);
+    }
+
+    .foot-strip a {
+      color: var(--amber);
+      text-decoration: none;
+      font-size: .82rem;
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: color .2s;
+    }
+    .foot-strip a:hover { color: var(--amber-l); }
+
+    /* ── Responsive ── */
+    @media (max-width: 600px) {
+      .page { padding: 36px 18px 64px; }
+      .section { padding: 24px 20px; }
+      .info-grid { grid-template-columns: 1fr; }
+      .topbar .brand { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top navigation bar -->
+  <div class="topbar">
+    <a href="index2.html">
+      <span class="arrow">&#8592;</span>
+      Zurück zur Website
+    </a>
+    <span class="brand">Michaelis – Bagger-Andi</span>
+  </div>
+
+  <!-- Main content -->
+  <div class="page">
+
+    <h1 class="page-title">Im<span>pressum</span></h1>
+    <p class="subtitle">Angaben gemäß § 5 TMG &amp; § 55 RStV</p>
+
+    <!-- Anbieter -->
+    <div class="section">
+      <h2><span class="icon">🏢</span>Angaben gemäß § 5 TMG</h2>
+      <address>
+        <strong style="color:var(--text);">Haus-, Garten- &amp; Bauservice Michaelis</strong><br>
+        <span class="ph">[Straße und Hausnummer]</span><br>
+        <span class="ph">[PLZ]</span> <span class="ph">[Ort]</span><br>
+        Deutschland
+      </address>
+
+      <div class="divider"></div>
+
+      <div class="info-grid">
+        <div class="info-item">
+          <div class="label">Inhaber</div>
+          <div class="value"><span class="ph">[Vorname Nachname]</span></div>
+        </div>
+        <div class="info-item">
+          <div class="label">Telefon</div>
+          <div class="value">
+            <a href="tel:+4915786841833">0157 / 86841833</a>
+          </div>
+        </div>
+        <div class="info-item">
+          <div class="label">E-Mail</div>
+          <div class="value"><span class="ph">[email@domain.de]</span></div>
+        </div>
+        <div class="info-item">
+          <div class="label">Steuernummer / USt-ID</div>
+          <div class="value"><span class="ph">[DE123456789]</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Handelsregister -->
+    <div class="section">
+      <h2><span class="icon">📋</span>Gewerbeanmeldung</h2>
+      <p>
+        Eingetragen beim Gewerbeamt <span class="ph">[Gewerbeamt Stadt]</span><br>
+        Gewerbe-Registernummer: <span class="ph">[Registernummer]</span>
+      </p>
+    </div>
+
+    <!-- Haftung für Inhalte -->
+    <div class="section">
+      <h2><span class="icon">⚖️</span>Haftung für Inhalte</h2>
+      <p>
+        Als Diensteanbieter sind wir gemäß § 7 Abs. 1 TMG für eigene Inhalte auf diesen Seiten
+        nach den allgemeinen Gesetzen verantwortlich. Nach §§ 8 bis 10 TMG sind wir als
+        Diensteanbieter jedoch nicht verpflichtet, übermittelte oder gespeicherte fremde
+        Informationen zu überwachen oder nach Umständen zu forschen, die auf eine rechtswidrige
+        Tätigkeit hinweisen.
+      </p>
+      <p style="margin-top:12px;">
+        Verpflichtungen zur Entfernung oder Sperrung der Nutzung von Informationen nach den
+        allgemeinen Gesetzen bleiben hiervon unberührt. Eine diesbezügliche Haftung ist jedoch
+        erst ab dem Zeitpunkt der Kenntnis einer konkreten Rechtsverletzung möglich. Bei
+        Bekanntwerden von entsprechenden Rechtsverletzungen werden wir diese Inhalte umgehend
+        entfernen.
+      </p>
+    </div>
+
+    <!-- Haftung für Links -->
+    <div class="section">
+      <h2><span class="icon">🔗</span>Haftung für Links</h2>
+      <p>
+        Unser Angebot enthält Links zu externen Webseiten Dritter, auf deren Inhalte wir keinen
+        Einfluss haben. Deshalb können wir für diese fremden Inhalte auch keine Gewähr übernehmen.
+        Für die Inhalte der verlinkten Seiten ist stets der jeweilige Anbieter oder Betreiber der
+        Seiten verantwortlich.
+      </p>
+      <p style="margin-top:12px;">
+        Die verlinkten Seiten wurden zum Zeitpunkt der Verlinkung auf mögliche Rechtsverstöße
+        überprüft. Rechtswidrige Inhalte waren zum Zeitpunkt der Verlinkung nicht erkennbar.
+        Eine permanente inhaltliche Kontrolle der verlinkten Seiten ist jedoch ohne konkrete
+        Anhaltspunkte einer Rechtsverletzung nicht zumutbar. Bei Bekanntwerden von
+        Rechtsverletzungen werden wir derartige Links umgehend entfernen.
+      </p>
+    </div>
+
+    <!-- Urheberrecht -->
+    <div class="section">
+      <h2><span class="icon">©️</span>Urheberrecht</h2>
+      <p>
+        Die durch die Seitenbetreiber erstellten Inhalte und Werke auf diesen Seiten unterliegen
+        dem deutschen Urheberrecht. Die Vervielfältigung, Bearbeitung, Verbreitung und jede Art
+        der Verwertung außerhalb der Grenzen des Urheberrechtes bedürfen der schriftlichen
+        Zustimmung des jeweiligen Autors bzw. Erstellers.
+      </p>
+      <p style="margin-top:12px;">
+        Downloads und Kopien dieser Seite sind nur für den privaten, nicht kommerziellen Gebrauch
+        gestattet. Soweit die Inhalte auf dieser Seite nicht vom Betreiber erstellt wurden, werden
+        die Urheberrechte Dritter beachtet.
+      </p>
+    </div>
+
+    <!-- Datenschutz -->
+    <div class="section">
+      <h2><span class="icon">🔒</span>Datenschutz</h2>
+
+      <h3>Verantwortlicher</h3>
+      <p>
+        Verantwortlich für die Datenverarbeitung im Sinne der DSGVO:<br>
+        <span class="ph">[Vollständiger Name des Inhabers]</span><br>
+        <span class="ph">[Straße und Hausnummer]</span>, <span class="ph">[PLZ Ort]</span><br>
+        E-Mail: <span class="ph">[email@domain.de]</span>
+      </p>
+
+      <div class="divider"></div>
+
+      <h3>Erhobene Daten</h3>
+      <p>
+        Diese Website erhebt und verarbeitet nur die Daten, die Sie uns im Rahmen der
+        Kontaktaufnahme freiwillig mitteilen (z. B. Name, Telefonnummer, Nachricht).
+        Eine Weitergabe an Dritte erfolgt nicht ohne Ihre ausdrückliche Einwilligung.
+      </p>
+
+      <div class="divider"></div>
+
+      <h3>Hosting</h3>
+      <p>
+        Diese Website wird gehostet bei: <span class="ph">[Hosting-Anbieter, z.B. IONOS / Strato / Hetzner]</span><br>
+        Serverstandort: <span class="ph">[Land / Rechenzentrum]</span>
+      </p>
+
+      <div class="divider"></div>
+
+      <h3>Ihre Rechte</h3>
+      <p>
+        Sie haben jederzeit das Recht auf Auskunft, Berichtigung, Löschung und Einschränkung
+        der Verarbeitung Ihrer personenbezogenen Daten sowie ein Widerspruchsrecht gegen die
+        Verarbeitung. Zur Ausübung dieser Rechte wenden Sie sich bitte an die oben genannte
+        Kontaktadresse.
+      </p>
+      <p style="margin-top:12px;">
+        Sie haben zudem das Recht, sich bei der zuständigen Aufsichtsbehörde zu beschweren:
+        <span class="ph">[Zuständige Datenschutzaufsichtsbehörde des Bundeslandes]</span>
+      </p>
+    </div>
+
+    <!-- Streitschlichtung -->
+    <div class="section">
+      <h2><span class="icon">🤝</span>Streitschlichtung</h2>
+      <p>
+        Die Europäische Kommission stellt eine Plattform zur Online-Streitbeilegung (OS) bereit:
+        <a href="https://ec.europa.eu/consumers/odr" target="_blank" rel="noopener">
+          https://ec.europa.eu/consumers/odr
+        </a>.
+      </p>
+      <p style="margin-top:12px;">
+        Wir sind nicht bereit oder verpflichtet, an Streitbeilegungsverfahren vor einer
+        Verbraucherschlichtungsstelle teilzunehmen.
+      </p>
+    </div>
+
+    <!-- Footer strip -->
+    <div class="foot-strip">
+      <p>© 2026 Haus-, Garten- &amp; Bauservice Michaelis. Alle Rechte vorbehalten.</p>
+      <a href="index2.html">&#8592; Zur Startseite</a>
+    </div>
+
+  </div><!-- /page -->
+
+</body>
+</html>
