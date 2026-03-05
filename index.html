@@ -554,6 +554,27 @@
       line-height: 1.3;
       letter-spacing: .01em;
     }
+    .svc-tile-arrow {
+      display: inline-block;
+      margin-top: .35rem;
+      font-size: .65rem;
+      font-weight: 700;
+      color: rgba(255,255,255,.7);
+      letter-spacing: .04em;
+      text-transform: uppercase;
+      transition: color .25s, transform .25s;
+    }
+    .svc-tile:hover .svc-tile-arrow {
+      color: #fff;
+      transform: translateX(3px);
+    }
+    .svc-tiles-hint {
+      margin-top: .6rem;
+      font-size: .7rem;
+      color: var(--muted);
+      text-align: center;
+      letter-spacing: .02em;
+    }
 
     /* ── Service Modal ── */
     .svc-modal-overlay {
@@ -1518,6 +1539,7 @@
           <div class="svc-tile-overlay">
             <span class="svc-tile-ico">❄️</span>
             <span class="svc-tile-name">Winterdienst</span>
+            <span class="svc-tile-arrow">Details →</span>
           </div>
         </a>
         <a href="#" class="svc-tile" onclick="openSvcModal('galabau'); return false;">
@@ -1525,6 +1547,7 @@
           <div class="svc-tile-overlay">
             <span class="svc-tile-ico">🌿</span>
             <span class="svc-tile-name">Garten- &amp; Landschaftsbau</span>
+            <span class="svc-tile-arrow">Details →</span>
           </div>
         </a>
         <a href="#" class="svc-tile" onclick="openSvcModal('erdbau'); return false;">
@@ -1532,6 +1555,7 @@
           <div class="svc-tile-overlay">
             <span class="svc-tile-ico">🏗️</span>
             <span class="svc-tile-name">Erdarbeiten &amp; Tiefbau</span>
+            <span class="svc-tile-arrow">Details →</span>
           </div>
         </a>
         <a href="#" class="svc-tile" onclick="openSvcModal('wasserbau'); return false;">
@@ -1539,6 +1563,7 @@
           <div class="svc-tile-overlay">
             <span class="svc-tile-ico">💧</span>
             <span class="svc-tile-name">Wasserbau &amp; Gewässerunterhaltung</span>
+            <span class="svc-tile-arrow">Details →</span>
           </div>
         </a>
         <a href="#" class="svc-tile" onclick="openSvcModal('abbruch'); return false;">
@@ -1546,9 +1571,11 @@
           <div class="svc-tile-overlay">
             <span class="svc-tile-ico">🔨</span>
             <span class="svc-tile-name">Abbruch &amp; Rückbau</span>
+            <span class="svc-tile-arrow">Details →</span>
           </div>
         </a>
       </div>
+      <p class="svc-tiles-hint">👆 Auf Kachel tippen für Leistungsdetails</p>
     </div><!-- /hero-content -->
     </div><!-- /hero-inner -->
   </div>
