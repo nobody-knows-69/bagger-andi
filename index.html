@@ -1905,6 +1905,65 @@
     </div>
   </section>
 
+  <!-- ── KONTAKT ── -->
+  <section class="section" id="kontakt">
+    <div class="pill">📞 Kontakt</div>
+    <h2>Sprechen Sie uns an –<br>wir beraten Sie gerne</h2>
+
+    <div class="contact-inner">
+      <a class="big-phone" href="tel:015786841833">
+        <div class="dot">📞</div>
+        <div class="info">
+          <small>Direkt anrufen</small>
+          <strong>0157 / 86841833</strong>
+        </div>
+      </a>
+
+      <div class="callout">
+        💬 <strong>Kostenlose Beratung und Angebot auf Anfrage.</strong><br>
+        Wir melden uns schnellstmöglich – auch für kurzfristige Einsätze.
+      </div>
+
+      <div class="cform">
+        <h3>Anfrage senden</h3>
+        <form onsubmit="handleForm(event)">
+          <div class="row2">
+            <div class="fg">
+              <label>Name *</label>
+              <input type="text" id="f-name" placeholder="Ihr Name" required/>
+            </div>
+            <div class="fg">
+              <label>Telefon *</label>
+              <input type="tel" id="f-tel" placeholder="0157 …" required/>
+            </div>
+          </div>
+          <div class="fg">
+            <label>Leistungsbereich</label>
+            <select>
+              <option value="">– bitte wählen –</option>
+              <option>Erdarbeiten &amp; Tiefbau</option>
+              <option>Wasserbau &amp; Gewässerunterhaltung</option>
+              <option>Garten- &amp; Landschaftsbau</option>
+              <option>Abbruch &amp; Rückbau</option>
+              <option>Winterdienst</option>
+              <option>Sonstiges</option>
+            </select>
+          </div>
+          <div class="fg">
+            <label>Ihre Nachricht *</label>
+            <textarea id="f-msg" placeholder="Kurze Beschreibung Ihres Vorhabens …" required></textarea>
+          </div>
+          <label class="check-wrap">
+            <input type="checkbox" id="f-dsgvo" required/>
+            <span>Ich stimme der Verarbeitung meiner Daten gemäß der <a href="#" onclick="showImpressum(); return false;">Datenschutzerklärung</a> zu. *</span>
+          </label>
+          <button type="submit" class="btn btn-amber" style="width:100%;border-radius:var(--r-sm);padding:.85rem;justify-content:center">
+            Kostenloses Angebot anfragen →
+          </button>
+        </form>
+      </div>
+    </div>
+  </section>
 
   <!-- ── FOOTER ── -->
   <footer>
