@@ -259,22 +259,24 @@
       pointer-events: none;
     }
 
-    /* Split layout: text left, mascot right */
+    /* Centered column layout: mascot on top, brand name below */
     .hero-inner {
       position: relative;
       display: flex;
-      align-items: flex-start;
-      gap: 2.5rem;
+      flex-direction: column;
+      align-items: center;
+      gap: 0;
     }
 
     .hero-content {
-      flex: 1 1 0;
-      min-width: 0;
-      padding-top: .5rem;
+      width: 100%;
+      max-width: 640px;
+      text-align: center;
     }
 
     .hero-mascot {
-      flex: 0 0 320px;
+      width: 300px;
+      margin-bottom: 1.2rem;
     }
 
     .mascot-img {
@@ -338,6 +340,7 @@
       flex-wrap: wrap;
       gap: .85rem;
       align-items: center;
+      justify-content: center;
       margin-bottom: 2.8rem;
     }
 
@@ -434,6 +437,7 @@
       flex-wrap: wrap;
       gap: .85rem;
       margin-top: 2.8rem;
+      justify-content: center;
     }
 
     .stat {
@@ -839,8 +843,7 @@
       .sidebar.open { transform: translateX(0); }
       .main { margin-left: 0; padding-top: 88px; } /* 30px banner + 58px mob-bar */
       .hero, .section { padding: 2.5rem 1.4rem; }
-      .hero-inner { flex-direction: column-reverse; gap: 1.8rem; align-items: center; }
-      .hero-mascot { flex: 0 0 auto; width: min(260px, 65vw); align-self: center; }
+      .hero-mascot { width: min(240px, 60vw); }
       footer { padding: 1.5rem 1.4rem; }
       .gal-grid { columns: 1; }
       .row2 { flex-direction: column; gap: 0; }
@@ -1333,6 +1336,9 @@
   <div class="hero" id="home">
     <div class="hero-bg"></div>
     <div class="hero-inner">
+    <div class="hero-mascot">
+      <img src="neue%20pic/ani.png" alt="Bagger-Andi" class="mascot-img">
+    </div>
     <div class="hero-content">
       <div class="pill">⚡ Regional · Zuverlässig · Fachgerecht</div>
       <h1>
@@ -1361,9 +1367,6 @@
         <div class="stat"><div class="n">1×</div><div class="l">Alles aus einer Hand</div></div>
       </div>
     </div><!-- /hero-content -->
-    <div class="hero-mascot">
-      <img src="neue%20pic/ani.png" alt="Bagger-Andi" class="mascot-img">
-    </div>
     </div><!-- /hero-inner -->
   </div>
 
