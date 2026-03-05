@@ -328,12 +328,36 @@
       letter-spacing: -.04em;
     }
 
-    .hero-sub {
-      font-size: clamp(.95rem, 1.8vw, 1.15rem);
-      color: var(--muted);
-      font-weight: 400;
-      max-width: 520px;
-      margin-bottom: 2rem;
+    /* ── Slogan ticker ── */
+    .ticker-wrap {
+      width: 100%;
+      overflow: hidden;
+      margin: .6rem 0 1.6rem;
+      padding: .55rem 0;
+      border-top: 1px solid rgba(212,137,10,.2);
+      border-bottom: 1px solid rgba(212,137,10,.2);
+      /* fade edges */
+      mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);
+      -webkit-mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);
+    }
+
+    .ticker-track {
+      display: flex;
+      white-space: nowrap;
+      animation: ticker-scroll 22s linear infinite;
+    }
+
+    .ticker-track span {
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--amber-l);
+      letter-spacing: .02em;
+      flex-shrink: 0;
+    }
+
+    @keyframes ticker-scroll {
+      from { transform: translateX(0); }
+      to   { transform: translateX(-50%); }
     }
 
     .hero-btns {
@@ -1342,7 +1366,14 @@
     </div>
     <div class="hero-content">
       <h1><em>Bagger-Andi</em></h1>
-      <p class="hero-sub">Winterdienst, GaLaBau, Erdbau bereit – Bagger-Andi: Stark zu jeder Zeit.</p>
+      <div class="ticker-wrap">
+        <div class="ticker-track">
+          <span>Winterdienst, GaLaBau, Erdbau bereit – Bagger-Andi: Stark zu jeder Zeit. &nbsp;⚡&nbsp; </span>
+          <span>Winterdienst, GaLaBau, Erdbau bereit – Bagger-Andi: Stark zu jeder Zeit. &nbsp;⚡&nbsp; </span>
+          <span>Winterdienst, GaLaBau, Erdbau bereit – Bagger-Andi: Stark zu jeder Zeit. &nbsp;⚡&nbsp; </span>
+          <span>Winterdienst, GaLaBau, Erdbau bereit – Bagger-Andi: Stark zu jeder Zeit. &nbsp;⚡&nbsp; </span>
+        </div>
+      </div>
       <div class="pill">⚡ Regional · Zuverlässig · Fachgerecht</div>
       <div class="hero-btns">
         <a href="#kontakt" class="btn btn-amber">Kostenloses Angebot →</a>
