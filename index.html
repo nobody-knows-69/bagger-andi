@@ -491,7 +491,7 @@
     /* ── Leistungsbereich Tiles ── */
     .svc-tiles {
       display: grid;
-      grid-template-columns: repeat(4, 1fr);
+      grid-template-columns: repeat(5, 1fr);
       gap: .65rem;
       margin-top: 2rem;
       width: 100%;
@@ -1018,7 +1018,7 @@
       h1 { font-size: 1.8rem; }
       h2 { font-size: 1.4rem; }
       .stats { gap: .6rem; }
-      .svc-tiles { grid-template-columns: repeat(2, 1fr); }
+      .svc-tiles { grid-template-columns: repeat(3, 1fr); }
       .hero-btns { flex-direction: column; align-items: flex-start; }
       .big-phone .info strong { font-size: 1.25rem; }
     }
@@ -1541,6 +1541,12 @@
             <span class="svc-tile-name">Wasserbau &amp; Gewässerunterhaltung</span>
           </div>
         </a>
+        <a href="#" class="svc-tile" onclick="openSvcModal('abbruch'); return false;" style="background: linear-gradient(135deg, #1a1d24 0%, #2a2d36 100%);">
+          <div class="svc-tile-overlay" style="background: linear-gradient(to top, rgba(0,0,0,.84) 0%, rgba(0,0,0,.2) 100%);">
+            <span class="svc-tile-ico">🔨</span>
+            <span class="svc-tile-name">Abbruch &amp; Rückbau</span>
+          </div>
+        </a>
       </div>
     </div><!-- /hero-content -->
     </div><!-- /hero-inner -->
@@ -1581,12 +1587,6 @@
           <span class="tag">🕳️ Schachtbaugruben</span>
           <span class="tag">🌊 Perimeterdrainage (DIN 4095)</span>
           <span class="tag">🪨 Tragschichteinbau &amp; Bodenstabilisierung</span>
-          <span class="tag">🏚️ Selektiver Rückbau (KrWG)</span>
-          <span class="tag">🔨 Abbruch versiegelter Flächen</span>
-          <span class="tag">🏠 Fassadensanierung</span>
-          <span class="tag">🏗️ Versetzarbeiten mit Mobilkran</span>
-          <span class="tag">🌲 Wegebau Forst &amp; Landwirtschaft</span>
-          <span class="tag">🪓 Grünberäumung &amp; Baumfällung</span>
         </div>
       </div>
       <div class="svc">
@@ -1616,6 +1616,20 @@
           <span class="tag">🌿 Rasengittersteine / Schotterrasen</span>
           <span class="tag">🌾 Grünflächenherstellung (DIN 18915)</span>
           <span class="tag">♿ Barrierefreie Außenanlagen (DIN 18040)</span>
+        </div>
+      </div>
+      <div class="svc">
+        <div class="svc-head">
+          <div class="svc-ico">🔨</div>
+          <h3>Abbruch &amp; Rückbau</h3>
+        </div>
+        <div class="tags">
+          <span class="tag">🏚️ Selektiver Rückbau (KrWG)</span>
+          <span class="tag">🔨 Abbruch versiegelter Flächen</span>
+          <span class="tag">🏠 Fassadensanierung</span>
+          <span class="tag">🏗️ Versetzarbeiten mit Mobilkran</span>
+          <span class="tag">🌲 Wegebau Forst &amp; Landwirtschaft</span>
+          <span class="tag">🪓 Grünberäumung &amp; Baumfällung</span>
         </div>
       </div>
     </div>
@@ -2216,7 +2230,13 @@
         '🔧 Kanalbauarbeiten',
         '🕳️ Schachtbaugruben',
         '🌊 Perimeterdrainage (DIN 4095)',
-        '🪨 Tragschichteinbau & Bodenstabilisierung',
+        '🪨 Tragschichteinbau & Bodenstabilisierung'
+      ]
+    },
+    abbruch: {
+      ico: '🔨', name: 'Abbruch & Rückbau',
+      img: '',
+      tags: [
         '🏚️ Selektiver Rückbau (KrWG)',
         '🔨 Abbruch versiegelter Flächen',
         '🏠 Fassadensanierung',
@@ -2242,8 +2262,10 @@
 
   function openSvcModal(key) {
     const d = SVC_DATA[key];
-    document.getElementById('svc-modal-img').src = d.img;
-    document.getElementById('svc-modal-img').alt = d.name;
+    const img = document.getElementById('svc-modal-img');
+    img.src = d.img;
+    img.alt = d.name;
+    img.style.display = d.img ? 'block' : 'none';
     document.getElementById('svc-modal-ico').textContent = d.ico;
     document.getElementById('svc-modal-name').textContent = d.name;
     document.getElementById('svc-modal-tags').innerHTML =
