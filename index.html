@@ -243,26 +243,53 @@
 
     /* ─────────── HERO ─────────── */
     .hero {
-      padding: 5rem 3.5rem 4.5rem;
+      padding: 3.5rem 3.5rem 3rem;
       position: relative;
       overflow: hidden;
       border-bottom: 1px solid var(--border);
-      background-image: url('WhatsApp%20Image%202026-02-26%20at%2017.11.31%20(9).jpeg');
-      background-size: cover;
-      background-position: center 40%;
     }
 
     .hero-bg {
       position: absolute;
       inset: 0;
-      background: linear-gradient(135deg,
-        rgba(14,16,20,.95) 0%,
-        rgba(14,16,20,.80) 55%,
-        rgba(14,16,20,.55) 100%);
+      background: radial-gradient(ellipse 65% 95% at 85% 60%,
+        rgba(212,137,10,.18) 0%,
+        rgba(212,137,10,.06) 45%,
+        transparent 70%);
       pointer-events: none;
     }
 
-    .hero-content { position: relative; max-width: 680px; }
+    /* Split layout: text left, mascot right */
+    .hero-inner {
+      position: relative;
+      display: flex;
+      align-items: flex-start;
+      gap: 2.5rem;
+    }
+
+    .hero-content {
+      flex: 1 1 0;
+      min-width: 0;
+      padding-top: .5rem;
+    }
+
+    .hero-mascot {
+      flex: 0 0 320px;
+    }
+
+    .mascot-img {
+      width: 100%;
+      height: auto;
+      display: block;
+      border-radius: 20px;
+      filter: drop-shadow(0 6px 44px rgba(212,137,10,.52));
+      transition: transform .35s ease, filter .35s ease;
+    }
+
+    .mascot-img:hover {
+      transform: translateY(-8px);
+      filter: drop-shadow(0 16px 58px rgba(212,137,10,.72));
+    }
 
     .pill {
       display: inline-flex;
@@ -281,9 +308,9 @@
     }
 
     h1 {
-      font-size: clamp(2.1rem, 4.5vw, 3.4rem);
+      font-size: clamp(1.6rem, 3.2vw, 2.4rem);
       font-weight: 800;
-      line-height: 1.1;
+      line-height: 1.15;
       letter-spacing: -.025em;
       margin-bottom: .8rem;
     }
@@ -292,6 +319,10 @@
       font-style: normal;
       color: var(--amber-l);
       display: block;
+      font-size: 1.35em;
+      line-height: 1.0;
+      margin-bottom: .15em;
+      letter-spacing: -.04em;
     }
 
     .hero-sub {
@@ -808,6 +839,8 @@
       .sidebar.open { transform: translateX(0); }
       .main { margin-left: 0; padding-top: 88px; } /* 30px banner + 58px mob-bar */
       .hero, .section { padding: 2.5rem 1.4rem; }
+      .hero-inner { flex-direction: column-reverse; gap: 1.8rem; align-items: center; }
+      .hero-mascot { flex: 0 0 auto; width: min(260px, 65vw); align-self: center; }
       footer { padding: 1.5rem 1.4rem; }
       .gal-grid { columns: 1; }
       .row2 { flex-direction: column; gap: 0; }
@@ -1299,11 +1332,12 @@
   <!-- ── HOME ── -->
   <div class="hero" id="home">
     <div class="hero-bg"></div>
+    <div class="hero-inner">
     <div class="hero-content">
       <div class="pill">⚡ Regional · Zuverlässig · Fachgerecht</div>
       <h1>
-        Haus-, Garten- &amp;<br>Bauservice
-        <em>Michaelis</em>
+        <em>Bagger-Andi</em>
+        Haus-, Garten- &amp;<br>Bauservice Michaelis
       </h1>
       <p class="hero-sub">
         Ihr zuverlässiger Partner – von der Baugrube bis zur Terrasse.
@@ -1326,7 +1360,11 @@
         <div class="stat"><div class="n">365</div><div class="l">Tage verfügbar</div></div>
         <div class="stat"><div class="n">1×</div><div class="l">Alles aus einer Hand</div></div>
       </div>
+    </div><!-- /hero-content -->
+    <div class="hero-mascot">
+      <img src="neue%20pic/ani.png" alt="Bagger-Andi" class="mascot-img">
     </div>
+    </div><!-- /hero-inner -->
   </div>
 
   <!-- ── PHOTO STRIP 1: TIEFBAU ── -->
