@@ -555,6 +555,78 @@
       letter-spacing: .01em;
     }
 
+    /* ── Service Modal ── */
+    .svc-modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,.72);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      z-index: 800;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity .3s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem;
+    }
+    .svc-modal-overlay.open {
+      opacity: 1;
+      pointer-events: all;
+    }
+    .svc-modal {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--r);
+      width: min(520px, 100%);
+      max-height: 82vh;
+      overflow-y: auto;
+      transform: scale(.93) translateY(18px);
+      transition: transform .3s cubic-bezier(.4,0,.2,1);
+      position: relative;
+    }
+    .svc-modal-overlay.open .svc-modal {
+      transform: scale(1) translateY(0);
+    }
+    .svc-modal-hero {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      display: block;
+    }
+    .svc-modal-close {
+      position: absolute;
+      top: .75rem;
+      right: .75rem;
+      background: rgba(0,0,0,.55);
+      border: none;
+      color: #fff;
+      width: 2.1rem;
+      height: 2.1rem;
+      border-radius: 50%;
+      font-size: 1rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .svc-modal-close:hover { background: var(--amber); }
+    .svc-modal-body { padding: 1.4rem 1.6rem 1.8rem; }
+    .svc-modal-title {
+      display: flex;
+      align-items: center;
+      gap: .6rem;
+      margin-bottom: 1.1rem;
+    }
+    .svc-modal-title .ico { font-size: 1.7rem; }
+    .svc-modal-title h3 {
+      font-size: 1.1rem;
+      font-weight: 800;
+      color: var(--text);
+      margin: 0;
+    }
+
     /* ─────────── SECTIONS ─────────── */
     .section {
       padding: 4rem 3.5rem;
@@ -1441,28 +1513,28 @@
         <a href="#galerie"  class="btn btn-outline">Referenzen ansehen</a>
       </div>
       <div class="svc-tiles">
-        <a href="#leistungen" class="svc-tile">
+        <a href="#" class="svc-tile" onclick="openSvcModal('winterdienst'); return false;">
           <img src="WhatsApp%20Image%202026-02-26%20at%2017.11.31%20(18).jpeg" alt="Winterdienst" loading="lazy">
           <div class="svc-tile-overlay">
             <span class="svc-tile-ico">❄️</span>
             <span class="svc-tile-name">Winterdienst</span>
           </div>
         </a>
-        <a href="#leistungen" class="svc-tile">
+        <a href="#" class="svc-tile" onclick="openSvcModal('galabau'); return false;">
           <img src="WhatsApp%20Image%202026-02-26%20at%2017.11.31%20(11).jpeg" alt="Garten- & Landschaftsbau" loading="lazy">
           <div class="svc-tile-overlay">
             <span class="svc-tile-ico">🌿</span>
             <span class="svc-tile-name">Garten- &amp; Landschaftsbau</span>
           </div>
         </a>
-        <a href="#leistungen" class="svc-tile">
+        <a href="#" class="svc-tile" onclick="openSvcModal('erdbau'); return false;">
           <img src="WhatsApp%20Image%202026-02-26%20at%2017.11.31%20(17).jpeg" alt="Erdarbeiten & Tiefbau" loading="lazy">
           <div class="svc-tile-overlay">
             <span class="svc-tile-ico">🏗️</span>
             <span class="svc-tile-name">Erdarbeiten &amp; Tiefbau</span>
           </div>
         </a>
-        <a href="#leistungen" class="svc-tile">
+        <a href="#" class="svc-tile" onclick="openSvcModal('wasserbau'); return false;">
           <img src="WhatsApp%20Image%202026-02-26%20at%2017.11.31%20(16).jpeg" alt="Wasserbau & Gewässerunterhaltung" loading="lazy">
           <div class="svc-tile-overlay">
             <span class="svc-tile-ico">💧</span>
@@ -2082,6 +2154,21 @@
   </div><!-- /imp-body -->
 </div><!-- /imp-panel -->
 
+<!-- ══ SERVICE MODAL ══ -->
+<div class="svc-modal-overlay" id="svc-overlay" onclick="closeSvcModal(event)">
+  <div class="svc-modal" id="svc-modal">
+    <img class="svc-modal-hero" id="svc-modal-img" src="" alt="">
+    <button class="svc-modal-close" onclick="closeSvcModal()">✕</button>
+    <div class="svc-modal-body">
+      <div class="svc-modal-title">
+        <span class="ico" id="svc-modal-ico"></span>
+        <h3 id="svc-modal-name"></h3>
+      </div>
+      <div class="tags" id="svc-modal-tags"></div>
+    </div>
+  </div>
+</div>
+
 <script>
   document.getElementById('yr').textContent = new Date().getFullYear();
   document.querySelectorAll('.imp-yr').forEach(el => el.textContent = new Date().getFullYear());
@@ -2097,8 +2184,82 @@
     document.body.style.overflow = '';
   }
   document.addEventListener('keydown', e => {
-    if (e.key === 'Escape') closeImpressum();
+    if (e.key === 'Escape') { closeImpressum(); closeSvcModal(); }
   });
+
+  const SVC_DATA = {
+    winterdienst: {
+      ico: '❄️', name: 'Winterdienst',
+      img: 'WhatsApp%20Image%202026-02-26%20at%2017.11.31%20(18).jpeg',
+      tags: [
+        '❄️ Schneeräumung (Gehwege & Einfahrten)',
+        '🧂 Salz- & Splittstreuung',
+        '🚜 Maschineller Schneepflug',
+        '🏘️ Privatgrundstücke & Gewerbeflächen',
+        '🛣️ Parkplätze & Zugangswege',
+        '🏫 Kommunale & öffentliche Flächen',
+        '📞 Bereitschaftsdienst auf Abruf',
+        '🌡️ Eisbeseitigung & Glatteisbekämpfung'
+      ]
+    },
+    galabau: {
+      ico: '🌿', name: 'Garten- & Landschaftsbau',
+      img: 'WhatsApp%20Image%202026-02-26%20at%2017.11.31%20(11).jpeg',
+      tags: [
+        '🏡 Terrassen (Feinsteinzeug, Granit, Naturstein)',
+        '🏊 Private Poolanlagen',
+        '🧱 Pflasterarbeiten (Klinker, Granit, Basalt)',
+        '🌿 Rasengittersteine / Schotterrasen',
+        '🌾 Grünflächenherstellung (DIN 18915)',
+        '♿ Barrierefreie Außenanlagen (DIN 18040)'
+      ]
+    },
+    erdbau: {
+      ico: '🏗️', name: 'Erdarbeiten & Tiefbau',
+      img: 'WhatsApp%20Image%202026-02-26%20at%2017.11.31%20(17).jpeg',
+      tags: [
+        '♻️ Bodenaustausch & Entsorgung (LAGA)',
+        '⛏️ Baugrubenherstellung (DIN 4124)',
+        '🪵 Grabenverbau',
+        '💧 Wasserhaltung',
+        '🔧 Kanalbauarbeiten',
+        '🕳️ Schachtbaugruben',
+        '🌊 Perimeterdrainage (DIN 4095)',
+        '🪨 Tragschichteinbau & Bodenstabilisierung'
+      ]
+    },
+    wasserbau: {
+      ico: '💧', name: 'Wasserbau & Gewässerunterhaltung',
+      img: 'WhatsApp%20Image%202026-02-26%20at%2017.11.31%20(16).jpeg',
+      tags: [
+        '🛡️ Sohlensicherungen (VOB/C ATV DIN 18306)',
+        '🌉 Grabendurchlassbauwerke (DWA)',
+        '🏞️ Retentionsmulden (DWA-A 166)',
+        '🏖️ Ufersicherung',
+        '🚜 Grabenprofilierung & Entschlammung',
+        '⚙️ Kommunale Schöpfwerke',
+        '🌱 Naturnahe Grabeninstandsetzung'
+      ]
+    }
+  };
+
+  function openSvcModal(key) {
+    const d = SVC_DATA[key];
+    document.getElementById('svc-modal-img').src = d.img;
+    document.getElementById('svc-modal-img').alt = d.name;
+    document.getElementById('svc-modal-ico').textContent = d.ico;
+    document.getElementById('svc-modal-name').textContent = d.name;
+    document.getElementById('svc-modal-tags').innerHTML =
+      d.tags.map(t => `<span class="tag">${t}</span>`).join('');
+    document.getElementById('svc-overlay').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeSvcModal(e) {
+    if (e && e.target !== document.getElementById('svc-overlay')) return;
+    document.getElementById('svc-overlay').classList.remove('open');
+    document.body.style.overflow = '';
+  }
 
   function toggleSB() {
     document.getElementById('sidebar').classList.toggle('open');
