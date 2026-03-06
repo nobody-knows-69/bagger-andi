@@ -293,6 +293,57 @@
       filter: drop-shadow(0 16px 58px rgba(212,137,10,.72));
     }
 
+    .mascot-img { cursor: pointer; }
+    .mascot-play-hint {
+      text-align: center;
+      font-size: .78rem;
+      color: var(--amber);
+      opacity: .8;
+      margin-top: .35rem;
+      letter-spacing: .04em;
+    }
+
+    /* ── Video lightbox ── */
+    #video-modal {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      background: rgba(0,0,0,.88);
+      align-items: center;
+      justify-content: center;
+    }
+    #video-modal.open { display: flex; }
+    #video-modal .vm-inner {
+      position: relative;
+      width: min(92vw, 720px);
+      background: #111;
+      border-radius: 14px;
+      overflow: hidden;
+      box-shadow: 0 0 60px rgba(212,137,10,.4);
+    }
+    #video-modal video {
+      width: 100%;
+      display: block;
+      max-height: 80vh;
+      background: #000;
+    }
+    #video-modal .vm-close {
+      position: absolute;
+      top: 10px; right: 14px;
+      font-size: 1.6rem;
+      line-height: 1;
+      color: #fff;
+      background: rgba(0,0,0,.5);
+      border: none;
+      border-radius: 50%;
+      width: 36px; height: 36px;
+      cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      z-index: 10;
+    }
+    #video-modal .vm-close:hover { background: var(--amber); color: #000; }
+
     .pill {
       display: inline-flex;
       align-items: center;
@@ -1515,7 +1566,9 @@
     <div class="hero-bg"></div>
     <div class="hero-inner">
     <div class="hero-mascot">
-      <img src="neue%20pic/ani.png" alt="Bagger-Andi" class="mascot-img">
+      <img src="neue%20pic/ani.png" alt="Bagger-Andi" class="mascot-img"
+           onclick="document.getElementById('video-modal').classList.add('open');document.getElementById('andi-video').play()">
+      <div class="mascot-play-hint">▶ Video abspielen</div>
     </div>
     <div class="hero-content">
       <h1><em>Bagger-Andi</em></h1>
@@ -1639,7 +1692,7 @@
     </div>
   </div>
 
-  <!-- ── GALERIE v2 ── -->
+  <!-- ── GALERIE ── -->
   <section class="section" id="galerie">
     <div class="pill">📷 Referenzen</div>
     <h2>Projektgalerie</h2>
@@ -2408,6 +2461,33 @@
   }, { rootMargin: '-25% 0px -65% 0px' });
 
   document.querySelectorAll('[id]').forEach(s => obs.observe(s));
+</script>
+
+<!-- ── VIDEO LIGHTBOX ── -->
+<div id="video-modal">
+  <div class="vm-inner">
+    <button class="vm-close" onclick="closeVideo()" aria-label="Schließen">✕</button>
+    <video id="andi-video" controls playsinline preload="none">
+      <source src="bagger-andi.mp4" type="video/mp4">
+    </video>
+  </div>
+</div>
+<script>
+  function closeVideo() {
+    const modal = document.getElementById('video-modal');
+    const vid   = document.getElementById('andi-video');
+    modal.classList.remove('open');
+    vid.pause();
+    vid.currentTime = 0;
+  }
+  // close on backdrop click
+  document.getElementById('video-modal').addEventListener('click', function(e) {
+    if (e.target === this) closeVideo();
+  });
+  // close on Escape
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') closeVideo();
+  });
 </script>
 </body>
 </html>
