@@ -1610,14 +1610,6 @@
             <span class="svc-tile-arrow">Details →</span>
           </div>
         </a>
-        <a href="#" class="svc-tile" onclick="openSvcModal('wasserbau'); return false;">
-          <img src="pic020.jpeg" alt="Wasserbau & Gewässerunterhaltung" loading="lazy">
-          <div class="svc-tile-overlay">
-            <span class="svc-tile-ico">💧</span>
-            <span class="svc-tile-name">Wasserbau &amp; Gewässerunterhaltung</span>
-            <span class="svc-tile-arrow">Details →</span>
-          </div>
-        </a>
         <a href="#" class="svc-tile" onclick="openSvcModal('abbruch'); return false;">
           <img src="pic014.jpeg" alt="Abbruch & Rückbau" loading="lazy">
           <div class="svc-tile-overlay">
@@ -1651,18 +1643,6 @@
         <div class="pill">🌿 Garten- &amp; Landschaftsbau</div>
         <h2>Hochwertige Terrassen –<br>die begeistern</h2>
         <p>Von der Planung bis zur Fertigstellung – Feinsteinzeug, Naturstein, Granit. Bodengleiche Anschlüsse und barrierefreie Ausführung nach DIN 18040.</p>
-        <a href="#anfrage" class="btn btn-amber">Kostenloses Angebot →</a>
-      </div>
-    </div>
-  </div>
-
-  <!-- ── PHOTO STRIP 3: WASSERBAU ── -->
-  <div class="photo-strip" style="background-image:url('pic017.jpeg')">
-    <div class="ps-inner">
-      <div class="ps-content">
-        <div class="pill">💧 Wasserbau &amp; Gewässerunterhaltung</div>
-        <h2>Saubere Gewässer –<br>nachhaltig gesichert</h2>
-        <p>Ufersicherung, Grabenprofilierung und Sohlensicherungen – fachgerecht nach DWA und VOB/C. Für Kommunen, Wasserverbände und die Landwirtschaft.</p>
         <a href="#anfrage" class="btn btn-amber">Kostenloses Angebot →</a>
       </div>
     </div>
@@ -2043,8 +2023,8 @@
       <strong>Haus-, Garten- und Bauservice Michaelis</strong> – bekannt als
       <strong>„Bagger-Andi"</strong> – ist ein regional verwurzelter Betrieb,
       der für Privatkunden, Kommunen und landwirtschaftliche Betriebe tätig ist.
-      Von einfachen Gartenarbeiten bis hin zu anspruchsvollen Tiefbaumaßnahmen
-      und Wasserbau – wir bringen die passende Technik und das nötige
+      Von einfachen Gartenarbeiten bis hin zu anspruchsvollen Tiefbau- und
+      Gewässerbaumaßnahmen – wir bringen die passende Technik und das nötige
       Fachwissen mit.
     </p>
     <p class="about-intro" style="margin-top:-.5rem">
@@ -2155,7 +2135,6 @@
             <select>
               <option value="">– bitte wählen –</option>
               <option>Erdarbeiten &amp; Tiefbau</option>
-              <option>Wasserbau &amp; Gewässerunterhaltung</option>
               <option>Garten- &amp; Landschaftsbau</option>
               <option>Abbruch &amp; Rückbau</option>
               <option>Winterdienst</option>
@@ -2375,7 +2354,14 @@
         '🔧 Kanalbauarbeiten',
         '🕳️ Schachtbaugruben',
         '🌊 Perimeterdrainage (DIN 4095)',
-        '🪨 Tragschichteinbau & Bodenstabilisierung'
+        '🪨 Tragschichteinbau & Bodenstabilisierung',
+        '🛡️ Sohlensicherungen (VOB/C ATV DIN 18306)',
+        '🌉 Grabendurchlassbauwerke (DWA)',
+        '🏞️ Retentionsmulden (DWA-A 166)',
+        '🏖️ Ufersicherung',
+        '🚜 Grabenprofilierung & Entschlammung',
+        '⚙️ Kommunale Schöpfwerke',
+        '🌱 Naturnahe Grabeninstandsetzung'
       ]
     },
     abbruch: {
@@ -2390,19 +2376,6 @@
         '🪓 Grünberäumung & Baumfällung'
       ]
     },
-    wasserbau: {
-      ico: '💧', name: 'Wasserbau & Gewässerunterhaltung',
-      img: 'pic020.jpeg',
-      tags: [
-        '🛡️ Sohlensicherungen (VOB/C ATV DIN 18306)',
-        '🌉 Grabendurchlassbauwerke (DWA)',
-        '🏞️ Retentionsmulden (DWA-A 166)',
-        '🏖️ Ufersicherung',
-        '🚜 Grabenprofilierung & Entschlammung',
-        '⚙️ Kommunale Schöpfwerke',
-        '🌱 Naturnahe Grabeninstandsetzung'
-      ]
-    }
   };
 
   function openSvcModal(key) {
