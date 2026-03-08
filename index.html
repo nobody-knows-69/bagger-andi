@@ -202,23 +202,30 @@
     .mob-brand { font-weight: 800; font-size: .95rem; color: var(--amber-l); }
 
     .hbg {
+      -webkit-appearance: none;
+      appearance: none;
       background: none;
       border: none;
       cursor: pointer;
       padding: 6px;
+      display: -webkit-flex;
       display: flex;
+      -webkit-flex-direction: column;
       flex-direction: column;
-      gap: 5px;
+      gap: 5px;        /* Safari 14.1+ */
+      line-height: 0;  /* collapse inline spacing */
     }
 
     .hbg span {
       display: block;
       width: 23px;
-      height: 2px;
-      background: var(--text);
+      height: 3px;           /* slightly thicker – more visible */
+      background: #EAEAF0;   /* explicit colour – no var() fallback risk */
       border-radius: 2px;
       transition: transform .28s, opacity .2s;
+      margin-bottom: 5px;    /* gap fallback for Safari < 14.1 */
     }
+    .hbg span:last-child { margin-bottom: 0; }
 
     .hbg.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
     .hbg.open span:nth-child(2) { opacity: 0; }
@@ -227,8 +234,9 @@
     .overlay {
       display: none;
       position: fixed;
-      inset: 0;
+      top: 0; left: 0; right: 0; bottom: 0; /* inset fallback for Safari < 14 */
       background: rgba(0,0,0,.6);
+      -webkit-backdrop-filter: blur(3px);
       backdrop-filter: blur(3px);
       z-index: 390;
     }
@@ -1074,7 +1082,9 @@
 
     /* ─────────── RESPONSIVE ─────────── */
     @media (max-width: 820px) {
-      .mob-bar { display: flex; }
+      /* Keep WIP banner single-line so mob-bar top:30px stays valid */
+      .wip-banner { white-space: nowrap; overflow: hidden; font-size: .62rem; padding: .38rem .6rem; }
+      .mob-bar { display: -webkit-flex; display: flex; }
       .sidebar { transform: translateX(-100%); top: 30px; }
       .sidebar.open { transform: translateX(0); }
       .main { margin-left: 0; padding-top: 88px; } /* 30px banner + 58px mob-bar */
