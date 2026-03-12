@@ -1364,51 +1364,6 @@
     }
 
     /* trust strip — centered */
-    .ps-trust {
-      background: linear-gradient(rgba(0,0,0,.78), rgba(0,0,0,.78));
-      padding: 4rem 3.5rem;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-direction: column;
-      gap: 2rem;
-      min-height: 240px;
-      text-align: center;
-    }
-
-    .ps-trust-label {
-      font-size: .7rem;
-      font-weight: 700;
-      letter-spacing: .14em;
-      text-transform: uppercase;
-      color: var(--amber-l);
-    }
-
-    .ps-trust-stats {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 2rem 4.5rem;
-      justify-content: center;
-    }
-
-    .ps-trust-stat .n {
-      display: block;
-      font-size: 2.8rem;
-      font-weight: 800;
-      color: var(--amber-l);
-      line-height: 1;
-      text-shadow: 0 0 40px rgba(212,137,10,.5);
-    }
-
-    .ps-trust-stat .l {
-      display: block;
-      font-size: .75rem;
-      color: rgba(255,255,255,.6);
-      font-weight: 500;
-      text-transform: uppercase;
-      letter-spacing: .06em;
-      margin-top: .45rem;
-    }
 
     /* ─────────── MOBILE PHONE BUTTON ─────────── */
 
@@ -1503,10 +1458,7 @@
     @media (max-width: 820px) {
       .photo-strip { background-attachment: scroll; }
       .ps-inner { padding: 3rem 1.4rem; min-height: 280px; }
-      .ps-trust { padding: 2.5rem 1.4rem; }
       .ps-right { margin-left: 0; }
-      .ps-trust-stats { gap: 1.4rem 2.5rem; }
-      .ps-trust-stat .n { font-size: 2.2rem; }
     }
   </style>
 </head>
@@ -1977,31 +1929,6 @@
     </div>
 
   </section>
-
-  <!-- ── PHOTO STRIP 3: TRUST STATS ── -->
-  <div class="photo-strip" style="background-image:url('pic018.jpeg')">
-    <div class="ps-trust">
-      <div class="ps-trust-label">Warum Michaelis – Bagger-Andi</div>
-      <div class="ps-trust-stats">
-        <div class="ps-trust-stat">
-          <span class="n">5</span>
-          <span class="l">Leistungsbereiche</span>
-        </div>
-        <div class="ps-trust-stat">
-          <span class="n">365</span>
-          <span class="l">Tage einsatzbereit</span>
-        </div>
-        <div class="ps-trust-stat">
-          <span class="n">DIN</span>
-          <span class="l">Normgerechte Ausführung</span>
-        </div>
-        <div class="ps-trust-stat">
-          <span class="n">1×</span>
-          <span class="l">Alles aus einer Hand</span>
-        </div>
-      </div>
-    </div>
-  </div>
 
   <!-- ── ÜBER UNS ── -->
   <section class="section" id="ueber-uns">
