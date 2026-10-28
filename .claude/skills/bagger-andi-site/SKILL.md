@@ -25,6 +25,10 @@ Full background: `README.md` and `MEMORY.md` in this folder.
 3. Report the health-check result to the user. If it says "Rollback wurde ausgefuehrt", the site is back on the previous state; find the cause before retrying.
 4. Commit `index2.html` (+ new media) and push to `main`, but only when the user asked to save/commit. Pushing does not change the live site (that comes from the NAS).
 
+## Adding a batch of new photos
+
+Follow "Photo workflow (convention)" in MEMORY.md. In short: contact sheet → sort into tabs (Tiefbau / Terrassen & Pflaster / Garten & Service) → drop private or foreign images → check GPS, pixelate plates/house numbers/street signs and verify on a crop → rename to the next free `picNNN.jpg` grouped by tab → describe each in MEMORY.md → **show the user the proposed picks and wait for their choice** → add `.gal-item` cards to `index2.html` → preview via a local `python -m http.server` → `deploy-nas.ps1 -SiteOnly`.
+
 ## Rollback
 
 ```powershell

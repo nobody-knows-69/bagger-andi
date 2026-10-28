@@ -9,8 +9,10 @@ Last updated: 2026-10-28
 **Client:** Haus-, Garten- & Bauservice Michaelis (aka „Bagger-Andi")
 **Type:** Static single-page website
 **Phone:** 0157 / 86841833
-**Live URL:** https://nobody-knows-69.github.io/bagger-andi/
-**GitHub Repo:** https://github.com/nobody-knows-69/bagger-andi
+**Live URL (since 2026-10-28):** https://gzone.myds.me:8443/bagger-andi/ (NAS2, test operation, IPv6 only)
+**Old URL:** https://nobody-knows-69.github.io/bagger-andi/ → redirects to the NAS
+**GitHub Repo:** https://github.com/nobody-knows-69/bagger-andi (public; README.md = how-to)
+**Claude skill:** `.claude/skills/bagger-andi-site/SKILL.md` (edit/deploy/rollback workflow)
 
 ---
 
@@ -67,15 +69,33 @@ Last updated: 2026-10-28
   - Also fixed `inset: 0` → explicit `top/left/right/bottom` on overlay; added `-webkit-backdrop-filter`
 - **Phone icon removed** from mobile top bar (📞 button + `.mob-phone` CSS deleted)
 
+### Session 7 – Move to NAS, security, new photos (2026-10-28)
+- **NAS hosting**: site runs as container `bagger-andi` behind the existing gateway `nginx-funnel` on NAS2 (details: "Migration" sections below). Tile added to the NAS landing page.
+- **Keyring + scripts**: sudo password in Windows keyring (`NAS2-sudo`); `deploy-nas.ps1` (backup → checks → auto-rollback), `rollback-nas.ps1`, `nas-lib.ps1`, `nas-set-cred.ps1`, `nas-check.ps1`. Auto-rollback was tested for real twice (once on purpose, once by a real `-SiteOnly` bug, now fixed).
+- **Security**: audit, gateway hardened (nginx 1.30, read-only, cap_drop, headers, rate limits), file permissions tightened, Seller Hub stopped, DSM firewall enabled (final deny still missing; FritzBox only forwards 8443).
+- **GitHub Pages → redirect**: `index.html`/`404.html` forward to the NAS; the real site is `index2.html` (now tracked in git).
+- **Docs**: README.md + project skill added; gateway repo `ext_use` merged to `master`.
+- **New photos**: 35 WhatsApp photos from `neue pic2/` checked; 32 renamed to `pic048`–`pic079` (numbered by gallery tab), plates/house numbers pixelated, 3 private/foreign images left out. 11 added to the gallery (048, 049, 054 | 058, 055, 066, 069, 062 | 078, 079, 077) → 42 cards, deployed and verified on the NAS.
+
+### Photo workflow (convention, use for future batches)
+1. Contact sheet of the new folder; sort each photo into a gallery tab; drop private/foreign images (documents, screenshots, unrelated items).
+2. Privacy: check GPS EXIF (strip if present), pixelate licence plates, house numbers, street signs; verify the pixelation on a crop.
+3. Rename to the next free `picNNN.jpg` (3 digits, continuing the sequence), numbered **grouped by tab** (Tiefbau → Terrassen & Pflaster → Garten & Service). Keep originals in the source folder plus `_zuordnung_*.json` and `_uebersicht_*.jpg`.
+4. Add a one-line description per photo to the File Structure list below.
+5. Propose the best picks, show the user, add the chosen ones as `.gal-item` cards in `index2.html` (caption style: `<strong>Titel – Detail</strong>` + one factual sentence), preview locally, `deploy-nas.ps1 -SiteOnly`.
+
 ---
 
 ## File Structure
 
 ```
 D:\LOS\BaggerAndi\
-├── index.html               ← GitHub Pages entry (copy of index2.html)
-├── index2.html              ← PRIMARY WORKING FILE (gitignored)
+├── index2.html              ← THE SITE (edit here; tracked in git; deployed to the NAS as index.html)
+├── index.html, 404.html     ← GitHub Pages redirect to the NAS only. Never overwrite with the site!
+├── README.md                ← How-to for humans
 ├── MEMORY.md                ← This file
+├── deploy-nas.ps1, rollback-nas.ps1, nas-lib.ps1, nas-set-cred.ps1, nas-check.ps1  ← NAS scripts
+├── .claude/skills/bagger-andi-site/  ← Claude skill (only .claude/skills is tracked)
 ├── bagger-andi.mp4          ← Hero video (12MB, committed via !exception in .gitignore)
 ├── .gitignore
 ├── firmenprofil_bilder-1.pdf  (excluded from git, 19.9MB)
@@ -108,6 +128,20 @@ D:\LOS\BaggerAndi\
 ├── pic024.jpg – pic047.jpg  ← New batch: garden, rollrasen, pool, retaining walls
 │   Notable: pic039.jpg = Rollrasen verlegen (used in 3 Garten gallery cards)
 │            pic045.jpg = Pool/Teich excavation (strip 1 Tiefbau background)
+├── pic048.jpg – pic079.jpg  ← Batch 2026-10-24 (from `neue pic2/`, renamed 2026-10-28), numbered by gallery tab:
+│   Tiefbau & Kanalbau:
+│     048 Leitungsgraben mit Rüttelstampfer · 049 Graben an Hauswand, Bagger · 050 Aushub am Zaun
+│     051 Planum Freifläche · 052 Planum Waldgrundstück · 053 Transporter + Anhänger Kiesgrube · 054 Kipper beim Abladen
+│   Terrassen & Pflaster:
+│     055 Hof Betonpflaster + Entwässerungsrinne (Hausnr. verpixelt) · 056 Pflaster am Zaun · 057 Vorgarten Pflaster + Stufe (Hausnr./Straße verpixelt)
+│     058/059/060 Terrasse Großformat hell (fertig) · 061 Großformat Verlegung in Arbeit · 062 Terrasse in Arbeit mit Laser
+│     063 Plattenweg am Haus · 064 Terrassenplatten + Kiesrinne · 065 Plattenweg + neuer Rasen
+│     066 große Hoffläche Betonpflaster · 067 Pflaster Detail · 068 Terrasse am Holzlager · 069 Einfahrt mit Kiesstreifen (2 Kennzeichen verpixelt)
+│     070–075 Fischgrätpflaster mit Schacht (frisch verfugt, Zementschleier)
+│   Garten & Service:
+│     076 neuer Rasen · 077 Wärmepumpen-Fundament Kiesbett · 078/079 Eingangsstufe vorher/nachher (Granit)
+│   Not used (left in `neue pic2/`): Brief mit Beträgen (privat), TV-Karton, Google-Maps-Screenshot Fremdfirma, 1 Video
+│   Mapping original WhatsApp name → picNNN: `neue pic2/_zuordnung_pic048-079.json`; overview sheet `neue pic2/_uebersicht_pic048-079.jpg`
 └── WhatsApp Video 2026-02-26 at 17.11.37 (1).mp4  (excluded from git)
 ```
 
@@ -128,10 +162,10 @@ D:\LOS\BaggerAndi\
 
 ## Gallery Structure
 
-**Tab 1 – Tiefbau & Kanalbau** (`g-tiefbau`): 9 items
-**Tab 2 – Terrassen & Pflaster** (`g-terrassen`): 12 items
-**Tab 3 – Garten & Service** (`g-garten`): 11 items
-**Total: 31 gallery cards**
+**Tab 1 – Tiefbau & Kanalbau** (`g-tiefbau`): 9 items (new 2026-10-28: pic048, pic049, pic054)
+**Tab 2 – Terrassen & Pflaster** (`g-terrassen`): 19 items (new: pic058, pic055, pic066, pic069, pic062)
+**Tab 3 – Garten & Service** (`g-garten`): 14 items (new: pic078 vorher, pic079 nachher, pic077)
+**Total: 42 gallery cards** (CSS columns masonry: new cards appear spread across the columns, not at the end)
 
 ---
 

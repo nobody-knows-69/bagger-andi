@@ -41,6 +41,18 @@ Website für **Haus-, Garten- & Bauservice Michaelis** („Bagger-Andi"). Statis
 
 Das Deploy-Skript lädt automatisch alle Dateien hoch, die `index2.html` verwendet. Bei einem Fehler im Health-Check wird automatisch der vorherige Stand wiederhergestellt.
 
+## Neue Fotos
+
+Namensschema: fortlaufend `picNNN.jpg` (3-stellig), neue Serien **nach Galerie-Tab gruppiert** nummeriert:
+
+| Serie | Tiefbau & Kanalbau | Terrassen & Pflaster | Garten & Service |
+|---|---|---|---|
+| 2026-10 (`neue pic2/`) | pic048–054 | pic055–075 | pic076–079 |
+
+Vor der Veröffentlichung: GPS-Daten entfernen, Kennzeichen, Hausnummern und Straßenschilder verpixeln, private Bilder (Briefe, Screenshots) aussortieren. Eine Kurzbeschreibung jedes Fotos steht in `MEMORY.md` (Abschnitt „File Structure"). Am einfachsten: Ordner mit den neuen Fotos ablegen und Claude bitten, sie zu sichten. Er schlägt die besten vor, und nach deinem OK kommen sie auf die Seite.
+
+Galerie aktuell: 42 Karten (Tiefbau 9, Terrassen & Pflaster 19, Garten & Service 14).
+
 ## Rollback
 
 ```
