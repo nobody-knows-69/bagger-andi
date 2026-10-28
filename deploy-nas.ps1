@@ -4,17 +4,22 @@
 # Ablauf: Backup -> Upload in Staging -> nginx -t / compose config -> Umschalten -> Health-Check.
 # Schlaegt der Health-Check fehl, wird automatisch auf das Backup zurueckgerollt.
 # Manuelles Rollback: .\rollback-nas.ps1
-param([string]$ExtUse = "D:\LOS\ext_use", [switch]$SiteOnly)
+# Quelle der Website ist index2.html (landet auf dem NAS als index.html). Das index.html im Repo
+# ist nur noch die Weiterleitung von GitHub Pages auf das NAS.
+param([string]$ExtUse = "D:\LOS\ext_use", [switch]$SiteOnly, [string]$SiteSource = "index2.html")
 $ErrorActionPreference = "Stop"
 . "$PSScriptRoot\nas-lib.ps1"
 
 # --- Lokale Vorpruefung -----------------------------------------------------
 $gatewayFiles = "nginx.conf", "index.html", "docker-compose.yml" | ForEach-Object { Join-Path $ExtUse $_ }
-$html = Get-Content (Join-Path $PSScriptRoot "index.html") -Raw
+$sourcePath = Join-Path $PSScriptRoot $SiteSource
+if (-not (Test-Path $sourcePath)) { throw "Website-Quelle fehlt: $sourcePath" }
+$html = Get-Content $sourcePath -Raw
+if ($html -match 'http-equiv="refresh"') { throw "$SiteSource ist eine Weiterleitungsseite, nicht die Website." }
 $refs = [regex]::Matches($html, '(?:src|href|poster)="([^"#:]+)"|url\([''"]?([^)''":]+)') |
   ForEach-Object { if ($_.Groups[1].Success) { $_.Groups[1].Value } else { $_.Groups[2].Value } } |
   Where-Object { $_ -notmatch '^/' } | ForEach-Object { [uri]::UnescapeDataString($_) } | Sort-Object -Unique
-$siteFiles = @("index.html") + $refs
+$siteFiles = @($SiteSource) + $refs
 $missing = $siteFiles | Where-Object { -not (Test-Path (Join-Path $PSScriptRoot $_)) }
 if ($missing) { throw "Fehlende Website-Dateien: $($missing -join ', ')" }
 if (-not $SiteOnly) { $gatewayFiles | ForEach-Object { if (-not (Test-Path $_)) { throw "Fehlt: $_" } } }
@@ -45,7 +50,12 @@ $out; if ($LASTEXITCODE -ne 0) { throw "Backup fehlgeschlagen, nichts geaendert.
 # --- 2. Upload ins Staging --------------------------------------------------
 Write-Host "`n== 2. Upload"
 if (-not $SiteOnly) { Copy-ToNas $gatewayFiles "$NasExtUse/.staging" }
-$siteFiles | Group-Object { Split-Path $_ -Parent } | ForEach-Object {
+# Website-Quelle als index.html hochladen (ueber temporaere Kopie)
+$tmpDir = Join-Path ([IO.Path]::GetTempPath()) "bagger-andi-deploy"
+New-Item -ItemType Directory -Force $tmpDir | Out-Null
+Copy-Item $sourcePath (Join-Path $tmpDir "index.html") -Force
+Copy-ToNas @(Join-Path $tmpDir "index.html") "/volume1/docker/bagger-andi/site.new"
+$refs | Group-Object { Split-Path $_ -Parent } | ForEach-Object {
   $dir = if ($_.Name) { "/volume1/docker/bagger-andi/site.new/" + ($_.Name -replace '\\', '/') } else { "/volume1/docker/bagger-andi/site.new" }
   Copy-ToNas ($_.Group | ForEach-Object { Join-Path $PSScriptRoot $_ }) $dir
 }
@@ -77,6 +87,8 @@ if [ "$SITEONLY" = 0 ]; then
     || S $D rm -f nginx-funnel >/dev/null          # alter docker-run-Container muss weichen
   (cd "$EXT" && S $DC up -d) || { rollback_to "$TS"; exit 3; }
 fi
+# Bind-Mount haengt am alten (geloeschten) Ordner -> Container neu starten, damit er site/ neu einbindet
+S $D restart bagger-andi >/dev/null || { rollback_to "$TS"; exit 3; }
 S rm -rf "$ST"
 sleep 3
 echo "  Health-Check:"

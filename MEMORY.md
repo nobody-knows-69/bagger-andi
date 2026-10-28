@@ -200,16 +200,15 @@ D:\LOS\BaggerAndi\
 
 ## Deployment
 
-**How to update the live site:**
+**How to update the live site (since 2026-10-28: NAS, not GitHub Pages):**
 ```bash
-# Edit index2.html locally, then:
-cp index2.html index.html
-cd D:/LOS/BaggerAndi
-git add index.html
-git commit -m "describe your change"
-git push
-# GitHub Pages auto-deploys in ~2 minutes
+# Edit index2.html (the real site, now tracked in git), then:
+powershell -ExecutionPolicy Bypass -File D:\LOS\BaggerAndi\deploy-nas.ps1 -SiteOnly
+git add index2.html && git commit -m "describe your change" && git push
 ```
+- **Do NOT copy index2.html over index.html any more.** `index.html` + `404.html` are the GitHub Pages redirect to `https://gzone.myds.me:8443/bagger-andi/`. `deploy-nas.ps1` refuses a redirect page as source.
+- Undo the redirect: `git revert <redirect commit>` + push (Pages updates in ~2 min).
+- `-SiteOnly` restarts the bagger-andi container (bind mount would otherwise point at the deleted old folder).
 
 **GitHub CLI location:** `"C:\Program Files\GitHub CLI\gh.exe"`
 **CDN cache:** After push, hard-reload with `Ctrl+Shift+R` if changes aren't visible
