@@ -280,7 +280,8 @@ This is NOT one of the QNAPs from the QNAP data migration (192.168.178.99 / .100
   1. NAS firewall final deny (see above) + FritzBox: disable "Selbstständige Portfreigaben" (UPnP) for the NAS.
   2. Docker ports on `0.0.0.0` bypass the DSM firewall (Grafana 3000/3001, Influx 8086, Passbolt 8766/8767). Move `grafana-subpath` onto `ext_use_default`, drop 3001; bind others to `192.168.165.73`.
   3. Updates: `nginx:1.27-alpine` 18 months old (internet-facing), DSM 7.1.1 U9 (Jul 2025), grafana/influx images 8-9 months.
-  4. `/volume1/docker/ext_use` is 777 incl. `.env` → 750/640, `.env` 600.
+  4. ~~Permissions~~ **Done 2026-10-28**: only 3 Linux-mode files were really world-writable (777): `.env` → 600, `docker-compose.yml` → 644, `setup-grafana-key.sh` → 700. Other files are under Synology ACLs (everyone read, admins/gman write) and were left alone (no secrets). Rollback: `.\rollback-nas.ps1 -Perms 20261028-202810`. Leftover junk files `D:\LOS\ext_use\Caddyfile` / `...docker-compose.yml` in that folder (from an old scp).
+  - IPv4 for `gzone.myds.me`: not possible, Synology DDNS doesn't support it here (user, 2026-10-28). The site is reachable over IPv6 only.
   5. `docker-monitor` mounts docker.sock rw (= root), no ports.
   6. ~~Gateway containers~~ **Done 2026-10-28** (backup `20261028-201608` = state before): both on `nginx:1.30-alpine`, read-only rootfs + tmpfs, `cap_drop ALL` (+CHOWN/SETUID/SETGID/NET_BIND_SERVICE), `no-new-privileges`; HSTS/CSP/nosniff/frame headers; real client IP via `X-Real-IP` from DSM; rate limits 30 r/s per IP (burst 20/100/200) and `/grafana/login` 10 r/min (burst 10). Verified: 32 parallel page files → all 200, login limit → 429 after 10.
   - Not checked: default `admin` account disabled?, DSM auto-block, 2FA.

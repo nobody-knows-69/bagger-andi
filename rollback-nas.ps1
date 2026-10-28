@@ -2,7 +2,8 @@
 # Aufruf: .\rollback-nas.ps1                 (letztes Backup, d.h. Stand vor dem letzten Deploy)
 #         .\rollback-nas.ps1 -List           (Backups anzeigen)
 #         .\rollback-nas.ps1 -Backup 20261028-193000
-param([string]$Backup, [switch]$List)
+#         .\rollback-nas.ps1 -Perms 20261028-202810   (nur Dateirechte aus backups/perms-<ts>.txt zuruecksetzen)
+param([string]$Backup, [switch]$List, [string]$Perms)
 $ErrorActionPreference = "Stop"
 . "$PSScriptRoot\nas-lib.ps1"
 
@@ -14,6 +15,15 @@ for d in $(ls -1 $BKROOT 2>/dev/null | grep -E '^[0-9]{8}-[0-9]{6}$'); do
 done
 '@)
   exit 0
+}
+
+if ($Perms) {
+  Invoke-NasScript ($NasGatewayFns + "PF=`$BKROOT/perms-$Perms.txt`n" + @'
+S test -f "$PF" || { echo "$PF nicht gefunden"; exit 1; }
+S cat "$PF" | while read -r m o p; do S chmod "$m" "$p" && S chown "$o" "$p" && echo "  $m $o $p"; done
+echo "== Rechte zurueckgesetzt"
+'@)
+  exit $LASTEXITCODE
 }
 
 $sel = if ($Backup) { "TS=$Backup" } else { 'TS=$(cat $BKROOT/LATEST)' }
