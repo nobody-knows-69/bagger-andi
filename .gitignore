@@ -4,6 +4,7 @@ index.pdf
 index.txt
 *.mp4
 !bagger-andi.mp4
-.claude/
+.claude/*
+!.claude/skills/
 
 nas-info.txt
