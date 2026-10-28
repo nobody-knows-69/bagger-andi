@@ -1,6 +1,6 @@
 # Bagger-Andi Website – Project Memory
 
-Last updated: 2026-03-03
+Last updated: 2026-10-28
 
 ---
 
@@ -28,11 +28,8 @@ Last updated: 2026-03-03
 
 ### Session 2 – Real photos + Impressum
 - Listed directory: found 20 JPEG photos (WhatsApp) + 2 MP4 videos
-- Read and categorized all 20 photos into 3 gallery tabs:
-  - **Tiefbau & Kanalbau (5):** (2)(3)(4)(16)(17).jpeg
-  - **Terrassen & Pflaster (10):** 17.11.30, 17.11.31, (1)(6)(7)(8)(9)(10)(11)(12).jpeg
-  - **Garten & Service (5):** (5)(13)(14)(15)(18).jpeg
-- Rewrote `index2.html` (primary working file) with all real photos, URL-encoded filenames
+- Read and categorized all 20 photos into 3 gallery tabs
+- Rewrote `index2.html` (primary working file) with all real photos
 - Created `impressum.html` (standalone, later made redundant)
 - **Integrated Impressum into `index2.html`** as a slide-in right panel overlay
   - Triggered by footer link + sidebar nav ("Rechtliches" section)
@@ -40,19 +37,35 @@ Last updated: 2026-03-03
   - All content has `[PLATZHALTER]` badges for missing legal data
 
 ### Session 3 – WIP Banner + GitHub Pages
-- Added fixed WIP banner at top of page:
-  - German text: *"🚧 Diese Seite befindet sich noch im Aufbau – Testversion, keine offizielle Veröffentlichung"*
-  - Amber diagonal stripe background, pulsing dots animation
-  - Sidebar/mobile bar shifted down 30px to accommodate
-- Deployed to **GitHub Pages**:
-  - Repo: `nobody-knows-69/bagger-andi` (public)
-  - `index2.html` copied to `index.html` for Pages entry point
-  - `.gitignore` excludes: PDF, videos, index2.html, index.txt, index.pdf, .claude/
-  - 23 files committed: index.html, impressum.html, .gitignore, 20 JPEGs
-- Discussed SEO: Google Business Profile is the biggest traffic driver for local trades, not Google Sites
+- Added fixed WIP banner at top of page (German text, amber stripes, pulsing dots)
+- Deployed to **GitHub Pages**: repo `nobody-knows-69/bagger-andi` (public)
+- `index2.html` copied to `index.html` for Pages entry point
+- `.gitignore` excludes: PDF, raw videos, index2.html, index.txt, index.pdf, .claude/
 
-### Session 4 – This file
+### Session 4 – MEMORY.md created
 - Created `MEMORY.md` to persist project context across sessions
+
+### Session 5 – Major content + image overhaul (2026-03-05 / 03-06)
+- **Image rename**: All 47 images renamed from WhatsApp/PXL/Screenshot filenames → `pic001.jpeg` – `pic047.jpg` (standard format); all 36 HTML references updated
+- **GPS metadata stripped** from 21 images (piexif); 26 had no EXIF
+- **License plate blurred**: `pic018.jpeg` — "P-AM 880" pixelated at region (340,865)-(555,920) with 10× pixelation via Pillow
+- **Logo comparison**: `neue pic/ani.png` (625×846 cartoon mascot on excavator, orange bg) chosen over `neue pic/micha.png` (210×235 blurry vehicle)
+- **GaLaBau tile image**: Changed from `pic011.jpeg` → `pic006.jpeg`
+- **Trust stats**: "4 Leistungsbereiche" → **"5 Leistungsbereiche"**
+- **Photo strips**: Swapped background images strip 1 ↔ strip 3; then set strip 1 (Tiefbau) to `pic045.jpg`
+- **GaLaBau modal tag**: Added `🟩 Rollrasen Verlegung`
+- **Gallery expanded**: From 20 → 31 items; added 8 new cards from pics 024–047 across all 3 tabs + 3 pic039 cards in Garten & Service
+
+### Session 6 – Video lightbox + service restructure (2026-03-06)
+- **Click-to-play video**: Mascot image (`neue pic/ani.png`) is now clickable → opens fullscreen dark overlay modal playing `bagger-andi.mp4`; close via ✕, backdrop click, or Escape
+  - `bagger-andi.mp4` (12MB) committed to repo (`.gitignore` has `!bagger-andi.mp4` exception)
+- **Wasserbau tile removed**: All 7 Wasserbau & Gewässerunterhaltung services merged into Erdarbeiten & Tiefbau modal tags; Wasserbau photo strip (pic017) removed; dropdown option removed; `SVC_DATA.wasserbau` deleted
+- **Safari mobile menu fix** (3 root causes fixed):
+  1. `-webkit-appearance: none` on `.hbg` button (Safari forced system button style suppressing flex)
+  2. `margin-bottom: 5px` fallback on `.hbg span` (gap unsupported in Safari < 14.1)
+  3. `.wip-banner { white-space: nowrap }` on mobile (banner was wrapping to 2 lines, covering mob-bar via z-index)
+  - Also fixed `inset: 0` → explicit `top/left/right/bottom` on overlay; added `-webkit-backdrop-filter`
+- **Phone icon removed** from mobile top bar (📞 button + `.mob-phone` CSS deleted)
 
 ---
 
@@ -61,34 +74,75 @@ Last updated: 2026-03-03
 ```
 D:\LOS\BaggerAndi\
 ├── index.html               ← GitHub Pages entry (copy of index2.html)
-├── index2.html              ← PRIMARY WORKING FILE
-├── impressum.html           ← Standalone impressum (backup; integrated into index2.html)
+├── index2.html              ← PRIMARY WORKING FILE (gitignored)
 ├── MEMORY.md                ← This file
+├── bagger-andi.mp4          ← Hero video (12MB, committed via !exception in .gitignore)
 ├── .gitignore
 ├── firmenprofil_bilder-1.pdf  (excluded from git, 19.9MB)
-├── WhatsApp Image 2026-02-26 at 17.11.30.jpeg
-├── WhatsApp Image 2026-02-26 at 17.11.31.jpeg
-├── WhatsApp Image 2026-02-26 at 17.11.31 (1).jpeg   ← Granitbordstein Gehrung
-├── WhatsApp Image 2026-02-26 at 17.11.31 (2).jpeg   ← Sportanlage Unterbau (Tiefbau)
-├── WhatsApp Image 2026-02-26 at 17.11.31 (3).jpeg   ← Tragschichtmaterial (Tiefbau)
-├── WhatsApp Image 2026-02-26 at 17.11.31 (4).jpeg   ← Verdichtung Walze (Tiefbau)
-├── WhatsApp Image 2026-02-26 at 17.11.31 (5).jpeg   ← Muttererde (Garten)
-├── WhatsApp Image 2026-02-26 at 17.11.31 (6).jpeg   ← Terrasse + Glasschiebetür
-├── WhatsApp Image 2026-02-26 at 17.11.31 (7).jpeg   ← Linienentwässerung
-├── WhatsApp Image 2026-02-26 at 17.11.31 (8).jpeg   ← Feinsteinzeug Detail
-├── WhatsApp Image 2026-02-26 at 17.11.31 (9).jpeg   ← Terrasse fertig bodengleich
-├── WhatsApp Image 2026-02-26 at 17.11.31 (10).jpeg  ← Terrassenrand Detail
-├── WhatsApp Image 2026-02-26 at 17.11.31 (11).jpeg  ← Luftaufnahme Terrasse
-├── WhatsApp Image 2026-02-26 at 17.11.31 (12).jpeg  ← Rasengittersteine
-├── WhatsApp Image 2026-02-26 at 17.11.31 (13).jpeg  ← Baumstamm Abtransport (Garten)
-├── WhatsApp Image 2026-02-26 at 17.11.31 (14).jpeg  ← Versetzarbeiten Mobilkran (Garten)
-├── WhatsApp Image 2026-02-26 at 17.11.31 (15).jpeg  ← Grünschnitt (Garten)
-├── WhatsApp Image 2026-02-26 at 17.11.31 (16).jpeg  ← Kanalbauarbeiten (Tiefbau)
-├── WhatsApp Image 2026-02-26 at 17.11.31 (17).jpeg  ← Tiefe Baugrube (Tiefbau)
-├── WhatsApp Image 2026-02-26 at 17.11.31 (18).jpeg  ← Winterdienst (Garten)
-├── WhatsApp Video 2026-02-26 at 17.11.37.mp4         (excluded from git)
-└── WhatsApp Video 2026-02-26 at 17.11.37 (1).mp4    (excluded from git)
+├── neue pic/
+│   ├── ani.png              ← Company mascot logo (625×846, preferred)
+│   └── micha.png            ← Alternative logo (excluded from git)
+├── pic001.jpeg  ← Granitbordstein Gehrung
+├── pic002.jpeg  ← Sportanlage Unterbau (Tiefbau)
+├── pic003.jpeg  ← Tragschichtmaterial (Tiefbau)
+├── pic004.jpeg  ← Verdichtung Walze (Tiefbau)
+├── pic005.jpeg  ← Muttererde (Garten)
+├── pic006.jpeg  ← Terrasse + Glasschiebetür
+├── pic007.jpeg  ← Linienentwässerung
+├── pic008.jpeg  ← Feinsteinzeug Detail
+├── pic009.jpeg  ← Terrasse fertig bodengleich
+├── pic010.jpeg  ← Terrassenrand Detail
+├── pic011.jpeg  ← Luftaufnahme Terrasse
+├── pic012.jpeg  ← Rasengittersteine
+├── pic013.jpeg  ← Baumstamm Abtransport (Garten)
+├── pic014.jpeg  ← Versetzarbeiten Mobilkran (Garten)
+├── pic015.jpeg  ← Grünschnitt (Garten)
+├── pic016.jpeg  ← Tiefe Baugrube (Tiefbau)
+├── pic017.jpeg  ← Wasserbau/Graben (was strip 3 bg; still in repo)
+├── pic018.jpeg  ← Winterdienst (license plate BLURRED)
+├── pic019.jpeg  ← Erdbau/Tiefbau tile
+├── pic020.jpeg  ← (was Wasserbau tile; still in repo)
+├── pic021.jpeg  ← (unnumbered base)
+├── pic022.jpeg  ← (unnumbered base)
+├── pic023.jpeg  ← (unnumbered)
+├── pic024.jpg – pic047.jpg  ← New batch: garden, rollrasen, pool, retaining walls
+│   Notable: pic039.jpg = Rollrasen verlegen (used in 3 Garten gallery cards)
+│            pic045.jpg = Pool/Teich excavation (strip 1 Tiefbau background)
+└── WhatsApp Video 2026-02-26 at 17.11.37 (1).mp4  (excluded from git)
 ```
+
+---
+
+## Services (SVC_DATA keys)
+
+| Key | Name | Tile image |
+|-----|------|-----------|
+| `erdbau` | Erdarbeiten & Tiefbau | pic019.jpeg |
+| `galabau` | Garten- & Landschaftsbau | pic006.jpeg |
+| `abbruch` | Abbruch & Rückbau | pic014.jpeg |
+| `winterdienst` | Winterdienst | pic018.jpeg |
+
+> Wasserbau was removed – all 7 tags merged into `erdbau`.
+
+---
+
+## Gallery Structure
+
+**Tab 1 – Tiefbau & Kanalbau** (`g-tiefbau`): 9 items
+**Tab 2 – Terrassen & Pflaster** (`g-terrassen`): 12 items
+**Tab 3 – Garten & Service** (`g-garten`): 11 items
+**Total: 31 gallery cards**
+
+---
+
+## Photo Strips (top-to-bottom order)
+
+| Strip | Pill | Background | Layout |
+|-------|------|-----------|--------|
+| 1 | 🏗️ Erdarbeiten & Tiefbau | `pic045.jpg` | left |
+| 2 | 🌿 Garten- & Landschaftsbau | `pic011.jpeg` | right |
+| 3 | ❄️ Winterdienst | `pic018.jpeg` | right |
+| 4 | 🔨 Abbruch & Rückbau | `pic014.jpeg` | left |
 
 ---
 
@@ -123,6 +177,9 @@ D:\LOS\BaggerAndi\
 | `showG(id, btn)` | Switch gallery tab |
 | `showImpressum()` | Open impressum slide-in panel |
 | `closeImpressum()` | Close impressum panel |
+| `openSvcModal(key)` | Open service detail modal (uses SVC_DATA) |
+| `closeSvcModal()` | Close service modal |
+| `closeVideo()` | Close video lightbox + pause/reset video |
 | `handleForm(e)` | Contact form submission (alert placeholder) |
 | `IntersectionObserver` | Highlight active nav item on scroll |
 
@@ -131,13 +188,13 @@ D:\LOS\BaggerAndi\
 ## Pending / To-Do
 
 - [ ] Fill in `[PLATZHALTER]` fields in Impressum (address, name, email, Steuernummer, Gewerbeamt, hosting details)
+- [ ] Wire up contact form to real email (Formspree.io or similar, free tier)
+- [ ] Remove WIP banner when site goes live
 - [ ] Set up **Google Business Profile** (biggest SEO lever for local trades)
 - [ ] Optional: connect custom domain (e.g. `bagger-andi.de`) to GitHub Pages
 - [ ] Optional: add `LocalBusiness` JSON-LD schema markup for SEO
+- [ ] Optional: use `neue pic/ani.png` as favicon or og:image
 - [ ] Optional: embed Google Maps in Kontakt section
-- [ ] Optional: wire up contact form to real email (Formspree.io or similar, free tier)
-- [ ] Optional: add 2 MP4 videos to gallery when ready
-- [ ] Remove WIP banner when site goes live
 
 ---
 
@@ -151,17 +208,109 @@ cd D:/LOS/BaggerAndi
 git add index.html
 git commit -m "describe your change"
 git push
-# GitHub Pages auto-deploys in ~30 seconds
+# GitHub Pages auto-deploys in ~2 minutes
 ```
 
 **GitHub CLI location:** `"C:\Program Files\GitHub CLI\gh.exe"`
+**CDN cache:** After push, hard-reload with `Ctrl+Shift+R` if changes aren't visible
 
 ---
 
-## SEO Notes (discussed)
+## SEO Notes
 
 - Google Sites gives **no automatic SEO boost**
 - **Google Business Profile** (`business.google.com`) → highest ROI for local trades
 - List on: Gelbe Seiten, Das Örtliche, local trade directories
 - Link all listings to the GitHub Pages URL
 - Keywords to target: "Baggerarbeiten [Stadt]", "Tiefbau [Region]", "Terrassenbau [Region]"
+
+---
+
+## Migration: GitHub Pages -> private NAS (planned, 2026-10-28)
+
+### Goal
+Host the site on the private local NAS (**https://192.168.165.73/**), behind the nginx reverse proxy that already runs there (same pattern as the Grafana dashboard). React framework requested. No fixed public IP needed (DDNS or Cloudflare Tunnel instead). Secrets must come from the OS keyring, never from files or prompts.
+This is NOT one of the QNAPs from the QNAP data migration (192.168.178.99 / .100).
+
+### Verified facts
+- Site today: static single page, `index.html` (79 KB, identical to `index2.html`), no build system.
+- Referenced media: 30 files, **86.7 MB** in total. `pic024`-`pic044` are 6-8 MB each.
+- Fonts: Inter loaded from Google Fonts (GDPR issue, host locally).
+- Contact form (`handleForm`) is only an `alert` placeholder, sends nothing.
+- Uncommitted: `MEMORY.md`, `index2_v2_backup.html`, two screenshots, `neue pic/IMG-*`.
+- `.gitignore` now also excludes `nas-info.txt` and `nas-check.ps1`.
+
+### Verified on NAS2 (2026-10-28, local session)
+- Synology DSM, x86_64, 3.9 GB RAM (~2 GB available). SSH key login as `gman` works.
+- nginx on 80/443 is **DSM's own system nginx** (`/etc/nginx/nginx.conf.run`), not a container.
+- Docker is at `/usr/local/bin/docker` (not on non-interactive PATH) and needs sudo.
+- DSM 7.1.1-42962, volume1 4.5 TB (1.2 TB used). `gman` is in `administrators`.
+- sudo password lives in Windows keyring as generic credential `NAS2-sudo` (save with `.\nas-set-cred.ps1`; `cmdkey /pass` stored it empty). `.\nas-check.ps1` reads it and writes read-only results to `nas-info.txt`. Gotcha: .NET prepends a UTF-8 BOM to ssh stdin, the remote script strips it.
+- Compose: only `docker-compose` v1.28.5 (no `docker compose` v2).
+
+### Gateway already exists (test setup, found 2026-10-28)
+- Public entry: **`https://gzone.myds.me:8443/`** (Synology DDNS). DSM reverse-proxy rule (`sites-enabled/server.ReverseProxy.conf`): `gzone.myds.me:8443` → `http://127.0.0.1:8080`.
+- `nginx-funnel` container (`nginx:1.27-alpine`, `127.0.0.1:8080->80`). Config + landing page are bind mounts: `/volume1/docker/ext_use/nginx.conf` and `/volume1/docker/ext_use/index.html` (not in git).
+  - `= /` → static `index.html` (strict CSP `default-src 'none'`, so no JS; a React portal needs a CSP change)
+  - `/grafana/` → `http://192.168.165.73:3001` (`grafana-subpath` container, `GF_SERVER_SERVE_FROM_SUB_PATH=true`)
+  - everything else → 404
+- Gaps: apps are reached via host IP + published port (3001 is open on the whole LAN, bypassing the gateway); all containers sit on the default `bridge` (an unused `ext_use_default` network exists); no auth at the gateway.
+- Other containers: grafana :3000, influxdb1 :8086, seller-support-hub :8000/:8501, passbolt :8766/:8767, e3dc-writer, docker-monitor.
+
+### Bagger-Andi deployed behind the gateway (2026-10-28)
+- Live (test): `https://gzone.myds.me:8443/bagger-andi/`, tile added to the landing page. Verified end-to-end through DSM nginx.
+- Gateway source = repo `D:\LOS\ext_use` (GitHub `nobody-knows-69/ext_use`); changes there are **uncommitted**.
+  - `nginx-funnel` + `bagger-andi` now run via `docker-compose` in `/volume1/docker/ext_use` (network `ext_use_default`). Before, `nginx-funnel` was a plain `docker run` container.
+  - `/bagger-andi/` route uses `resolver 127.0.0.11` + variable, so the gateway still starts if bagger-andi is down. `absolute_redirect off` keeps redirects on :8443.
+  - bagger-andi container: `nginx:1.27-alpine`, no published port, content in `/volume1/docker/bagger-andi/site`.
+- Scripts in this repo (all use `nas-lib.ps1` → keyring sudo):
+  - `.\deploy-nas.ps1` (backup → upload to staging → `nginx -t` + compose check → switch → 7 health checks → **auto-rollback** on failure). `-SiteOnly` updates only the website files.
+  - `.\rollback-nas.ps1` (latest backup) / `-List` / `-Backup <ts>`. Backups in `/volume1/docker/ext_use/backups/<ts>/`. Rollback tested successfully 2026-10-28.
+  - Backup `20261028-192433` = original state before any change (nginx-funnel via docker run, no Bagger-Andi).
+- Gotcha: never `echo x | S tee file` in remote scripts (S uses stdin for the password); use `Swrite file text`.
+
+### Security audit (2026-10-28)
+- OK: TLS 1.3 + valid LE cert (until 2027-01-18), TLS 1.0/1.1 refused; DSM rule answers only for `gzone.myds.me`; gateway blocks path traversal, POST, dotfiles; Grafana 12.3.2 + InfluxDB need auth; SSH key-only.
+- Done: `seller-support-hub` stopped, restart policy set to `no` (container + `/volume1/docker/leads/data` kept; restart with `docker start seller-support-hub`).
+- Router = **FritzBox**, forwards only 8443 to the NAS (user, 2026-10-28). Phone on mobile data: 8443 works (via IPv6), 5001 blocked by the FritzBox.
+- DSM firewall **enabled** 2026-10-28 with 5 allow rules (LAN `192.168.165.0/24`, `fdc4:6071:67d1::/64`, `2003:d2:5f21:a500::/64`, TCP 8443, TCP 80), but the **final deny is NOT active** (no 6th rule saved, "if no rules match" still allow), so it blocks nothing yet. To do: add "Alle/Alle/Verweigern" as last rule or set deny per interface (LAN 1), then click "Übernehmen".
+  - Caveat: rule 3 uses the public Telekom IPv6 prefix, which can change on reconnect; update it then.
+- Auto-block on (10 tries / 5 min, permanent), allow list `192.168.165.0-254` (+ IPv6 subnets suggested). DoS protection on LAN 1 enabled.
+- Open, by priority:
+  1. NAS firewall final deny (see above) + FritzBox: disable "Selbstständige Portfreigaben" (UPnP) for the NAS.
+  2. Docker ports on `0.0.0.0` bypass the DSM firewall (Grafana 3000/3001, Influx 8086, Passbolt 8766/8767). Move `grafana-subpath` onto `ext_use_default`, drop 3001; bind others to `192.168.165.73`.
+  3. Updates: `nginx:1.27-alpine` 18 months old (internet-facing), DSM 7.1.1 U9 (Jul 2025), grafana/influx images 8-9 months.
+  4. `/volume1/docker/ext_use` is 777 incl. `.env` → 750/640, `.env` 600.
+  5. `docker-monitor` mounts docker.sock rw (= root), no ports.
+  6. ~~Gateway containers~~ **Done 2026-10-28** (backup `20261028-201608` = state before): both on `nginx:1.30-alpine`, read-only rootfs + tmpfs, `cap_drop ALL` (+CHOWN/SETUID/SETGID/NET_BIND_SERVICE), `no-new-privileges`; HSTS/CSP/nosniff/frame headers; real client IP via `X-Real-IP` from DSM; rate limits 30 r/s per IP (burst 20/100/200) and `/grafana/login` 10 r/min (burst 10). Verified: 32 parallel page files → all 200, login limit → 429 after 10.
+  - Not checked: default `admin` account disabled?, DSM auto-block, 2FA.
+
+### Still open
+- Is port 8443 forwarded on the router? Test `https://gzone.myds.me:8443/` from outside (phone on mobile data).
+
+### Target architecture (decided 2026-10-28)
+- **DSM nginx = the only outside entry** (TLS via DSM). The DSM rule `gzone.myds.me:8443` → `127.0.0.1:8080` already exists.
+- **Gateway container** = existing `nginx-funnel` (move its config into git) does path routing: `/` → portal, `/grafana/`, `/bagger-andi/`, `/<app>/`.
+- Bagger-Andi target URL: `https://gzone.myds.me:8443/bagger-andi/` (also the GitHub Pages redirect target).
+- **Portal** = React landing page with an app icon per app. Every new app = a React container on an internal Docker network (no published ports) + one gateway snippet + one portal entry.
+- Path-based (one URL); subdomain only for apps that can't run under a subpath.
+- Portal + Grafana behind a login; `/bagger-andi/` stays public for testers.
+- Status: **test project only**, not officially live. Own domain for Bagger-Andi deferred until go-live.
+
+### GitHub Pages redirect (final step)
+- Replace `index.html` (+ `404.html`) on GitHub Pages with meta-refresh + `location.replace` to the new NAS URL, so current testers don't need the new address.
+- Only after the NAS URL is publicly reachable and checked from outside the home network. Push only on the user's explicit go-ahead.
+
+### Plan
+1. **Images**: convert the 21 large photos to WebP, max 1920 px (target about 8 MB total instead of 86.7 MB).
+2. **Fonts + form**: self-host Inter; connect the contact form to a mail forwarder.
+3. **React shell**: Vite + React, content split into components. Alternative without React: serve `index.html` directly with nginx (saves about one day).
+4. **Container**: multi-stage Dockerfile (`node:22-alpine` build, `nginx:alpine` serve), Compose file, bound to `127.0.0.1:8081`.
+5. **Reverse proxy**: new server block in the existing nginx, own subdomain (`base: '/'`; a subpath would need `base` and `basename` changes).
+6. **Deploy**: GitHub Actions builds the image and pushes it to GHCR; the NAS pulls it (Watchtower or SSH `compose pull && up -d`).
+7. **Cutover**: lower DNS TTL to 300 s a day before, test on a test subdomain, switch DNS, keep GitHub Pages 7 days, then switch it off.
+
+### Risks
+- A NAS on a home line means power cuts, router reboots and limited upload; municipalities are the target audience, so downtime looks bad. Cloudflare Tunnel avoids port forwarding and adds CDN and DDoS protection.
+- Opening port 443 to the internet needs rate limiting or Fail2ban, a current nginx and a separate Docker network.
+- Existing pending items (Impressum placeholders, WIP banner, Google Business Profile) are unchanged and still open.
